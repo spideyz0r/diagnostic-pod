@@ -1,0 +1,49 @@
+version: 2.1
+
+commands:
+  docker-steps:
+    parameters:
+      docker-build-deps:
+        description: "Image build"
+        type: steps
+        default: []
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: "Building image"
+          command: "docker build -t spideyz0r/diagonostic-pod ."
+
+executors:
+  docker-executor:
+    docker:
+      - image: docker:17.05.0-ce-git
+
+jobs:
+  build:
+    executor: docker-executor
+    steps:
+      - docker-steps:
+          docker-build-deps:
+  deploy:
+    executor: docker-executor
+    steps:
+      - docker-steps:
+          docker-build-deps:
+      - run:
+          name: "Pushing image to Dockerhub"
+          command: |
+            docker login -u $DH_USERNAME -p $DH_TOKEN
+            docker push spideyz0r/diagnostic-pod:latest
+
+workflows:
+  diagnostic-pod-workflow:
+    jobs:
+      - build:
+          filters:
+            branches:
+              ignore: /^main$/
+      - deploy:
+          filters:
+            branches:
+              only: /^main$/
