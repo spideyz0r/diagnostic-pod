@@ -1,5 +1,8 @@
 # diagnostic-pod
 [![CircleCI](https://circleci.com/gh/spideyz0r/diagnostic-pod/tree/main.svg?style=shield)](https://circleci.com/gh/spideyz0r/diagnostic-pod/?branch=main)
 
+### The pod
+A fedora diagnostic pod with a few useful tools. 
+
 ### Usage
 `kubectl run --rm=true -it --image=spideyz0r/diagnostic-pod --restart=Never diagnostic-pod -- '/bin/bash'`
