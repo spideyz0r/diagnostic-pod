@@ -12,7 +12,7 @@ commands:
       - setup_remote_docker
       - run:
           name: "Building image"
-          command: "docker build -t spideyz0r/diagonostic-pod ."
+          command: "docker build -t spideyz0r/diagnostic-pod ."
 
 executors:
   docker-executor:
