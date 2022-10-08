@@ -1,7 +1,6 @@
-FROM fedora:34
-RUN dnf -y update
-RUN dnf -y install procps-ng vim colordiff
-RUN dnf -y install net-tools bind-utils nc iputils traceroute mtr iproute wget curl tcpdump ngrep mysql openssl
-RUN dnf -y install python gawk go git php
+FROM alpine
+RUN apk add vim colordiff
+RUN apk add net-tools bind-tools netcat-openbsd iputils traceroute mtr wget curl tcpdump ngrep mysql-client openssl
+RUN apk add python3 gawk git php
 COPY scripts /root/bin
 ENV PATH="$PATH:/root/bin"
