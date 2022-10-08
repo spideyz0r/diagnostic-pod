@@ -1,0 +1,4 @@
+#!/bin/bash
+[[ $# -ne 1 ]] && echo "Use: $0 cert" && exit 1
+timeout 1 openssl x509 -in $1 -text -noout
+

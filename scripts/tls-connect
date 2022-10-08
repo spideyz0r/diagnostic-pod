@@ -1,0 +1,6 @@
+[[ $# -eq 0 ]] && echo Use $0: virtual_host host && exit 1
+vh_host=$1
+host=$2
+[[ -z $2 ]] && host=$1
+
+timeout 1 openssl s_client -showcerts -servername "$vh_host" -connect "$host":443 2>/dev/null | openssl x509 -inform pem -noout -text
